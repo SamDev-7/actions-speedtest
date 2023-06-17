@@ -13,10 +13,9 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           file_name=$(date -Iseconds)
-          speedtest --simple > runs/file_name
-          ln -s runs/file_name latest
+          speedtest --simple > runs/$file_name
+          ln -s runs/$file_name latest
           git config user.name github-actions
-          git config user.email github-actions@github.com
           git add .
           git commit -m "New run"
           git push
