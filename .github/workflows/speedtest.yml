@@ -1,0 +1,22 @@
+name: Speedtest
+on: workflow_dispatch
+
+jobs:
+  test-speed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install speedtest
+        run: apt-get update -y && apt-get install -y speedtest-cli
+
+      - name: Run speedtest
+        run: |
+          cd $GITHUB_WORKSPACE
+          file_name=$(date -Iseconds)
+          speedtest --simple > runs/file_name
+          ln -s runs/file_name latest
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "New run"
+          git push
