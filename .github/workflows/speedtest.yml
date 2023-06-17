@@ -14,7 +14,7 @@ jobs:
           cd $GITHUB_WORKSPACE
           file_name=$(date -Iseconds)
           speedtest --simple > runs/$file_name
-          git config user.name github-actions
+          git config user.name github-actions-2
           git add .
           git commit -m "New run"
           git push
